@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}CoffeeWeb - Buscar Usuarios{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Resultados de búsqueda</h1>
+    <p>Resultados para "{{ query }}":</p>
+
+    <div class="row mt-3">
+        {% if usuarios %}
+            {% for usuario in usuarios %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body d-flex flex-grow-1">
+                            <div class="perfil-picture rounded-circle position-relative overflow-hidden" style="width: 2rem; height: 2rem;">
+                                <img src="{{ usuario.foto_perfil.url }}" alt="Foto de perfil" class="img-fluid rounded-circle">
+                            </div>
+                            {% if usuario.enlace_perfil %}
+                                <a href="{% url 'perfil' enlace_perfil=usuario.id %}" class="text-decoration-none align-self-center ms-2">{{ usuario.nombre }} {{ usuario.apellido }}</a>
+                            {% else %}
+                                <span class="text-muted">Enlace de perfil no disponible</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No se encontraron usuarios.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

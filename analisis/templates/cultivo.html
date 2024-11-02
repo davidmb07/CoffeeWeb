@@ -1,0 +1,364 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} CoffeeWeb - Analizar Cultivo {% endblock %}
+
+{% block content %}
+<!-- Bootstrap CSS v5.3.2 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<!-- styles css -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/cultivo.css' %}">
+
+<div class="container">
+  <div class="my-3 p-3 rounded shadow-sm col-md-6 mx-auto analisiscultivo">
+    <h4 class="border-bottom mb-0 text-center fw-bold text-uppercase">Análisis de Cultivos</h4>
+    <div class="pt-3">
+      <form action="{% url 'evaluar_cultivo' %}" method="post">
+        {% csrf_token %}
+        <!-- Información del terreno -->
+        <div class="container">
+          <p class="text-muted text-center p-2 fw-bold">Información del Terreno</p>
+          <div class="border-bottom mb-3">
+            <label for="terreno" class="fw-bold">Terreno</label>
+            <select class="form-select bg-transparent border-0" id="terrenoSelect" name="terrenoSelect" aria-label="Seleccionar Terreno"
+              required>
+              <option selected disabled>Seleccionar...</option>
+              {% for terreno in terrenos %}
+              <option value="{{ terreno.id }}" data-altitud="{{ terreno.altitud }}">{{ terreno.nombre }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-floating border-bottom mb-3">
+                <input type="number" class="form-control bg-transparent border-0" id="altitud" placeholder="altitud"
+                  name="altitud" value="" readonly required>
+                <label for="altitud" class="fw-bold">Altitud</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating border-bottom mb-1">
+                <input type="number" class="form-control bg-transparent border-0" id="area_cultivada"
+                  placeholder="area_cultivada" name="area_cultivada" required>
+                <label for="area_cultivada" class="form-label fw-bold">Area Cultivada</label>
+              </div>
+              <small class="form-text text-muted">Área cultivada en (m²).</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Información del Cultivo -->
+        <div class="container">
+          <p class="text-muted text-center mt-3 p-2 fw-bold">Información del Cultivo</p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="border-bottom mb-3">
+                <label for="variedad_cafe" class="fw-bold">Variedad de café</label>
+                <select class="form-select bg-transparent border-0" aria-label="Default select example" id="variedad_cafe" name="variedad_cafe" required>
+                  <option selected disabled>Seleccionar...</option>
+                  <option value="Typica">Typica</option>
+                  <option value="Bourbon">Bourbon</option>
+                  <option value="Caturra">Caturra</option>
+                  <option value="Mundo_Novo">Mundo Novo</option>
+                  <option value="Catuai">Catuai</option>
+                  <option value="SL28">SL28</option>
+                  <option value="SL34">SL34</option>
+                  <option value="Geisha">Geisha</option>
+                  <option value="Pacamara">Pacamara</option>
+                  <option value="Blue_Mountain">Blue Mountain</option>
+                  <option value="Maragogipe">Maragogipe</option>
+                  <option value="Villalobos">Villalobos</option>
+                  <option value="Kent">Kent</option>
+                  <option value="Icatu">Icatu</option>
+                  <option value="Ruiru">Ruiru 11</option>
+                  <option value="Catimor">Catimor</option>
+                  <option value="Castillo">Castillo</option>
+                  <option value="Colombia">Colombia</option>
+                  <option value="Tabi">Tabi</option>
+                  <option value="Villa_Sarchi">Villa Sarchi</option>
+                  <option value="Robusta_Kouillou">Robusta Kouillou</option>
+                  <option value="Robusta_Nana">Robusta Nana</option>
+                  <option value="Robusta_Congensis">Robusta Congensis</option>
+                  <option value="Robusta_Ugandese">Robusta Ugandese</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating border-bottom">
+                <input type="number" class="form-control bg-transparent border-0" id="edad_cultivo"
+                  placeholder="edad_cultivo" name="edad_cultivo" required>
+                <label for="edad_cultivo" class="form-label fw-bold">Edad del Cultivo</label>
+              </div>
+              <small class="form-text text-muted mb-3">Edad del cultivo en (Años).</small>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-floating border-bottom">
+                <input type="number" class="form-control bg-transparent border-0" id="densidad_plantacion"
+                  placeholder="densidad_plantacion" name="densidad_plantacion" required>
+                <label for="densidad_plantacion" class="form-label fw-bold">Densidad de plantación</label>
+              </div>
+              <small class="form-text text-muted mb-3">Número de plantas por hectárea.</small>
+            </div>
+            <div class="col-md-6">
+              <div class="border-bottom mt-3 mb-3">
+                <label for="sistema_cultivo" class="fw-bold">Sistema de cultivo</label>
+                <select class="form-select bg-transparent border-0" aria-label="Default select example" id="sistema_cultivo" name="sistema_cultivo" required>
+                  <option selected disabled>Seleccionar...</option>
+                  <option value="Convencional">Convencional</option>
+                  <option value="Organico">Orgánico</option>
+                  <option value="Agroforestal">Agroforestal</option>
+                  <option value="Biodinamico">Biodinámico</option>
+                  <option value="Sombreado">Sombreado</option>
+                  <option value="Monocultivo">Monocultivo</option>
+                  <option value="Policultivo">Policultivo</option>
+                  <option value="Hidroponico">Hidropónico</option>
+                  <option value="Acuaponico">Acuapónico</option>
+                  <option value="Agroecologico">Agroecológico</option>
+                  <option value="Sintropico">Sintrópico</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-floating border-bottom">
+                <input type="date" class="form-control bg-transparent border-0" id="date_ultima_cosecha"
+                  placeholder="date_ultima_cosecha" name="date_ultima_cosecha" required>
+                  <label for="fecha_ultima_cosecha" class="form-label fw-bold">Fecha de última cosecha</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating border-bottom">
+                <input type="number" class="form-control bg-transparent border-0" id="produccion_anual"
+                  placeholder="produccion_anual" name="produccion_anual" required>
+                <label for="produccion_anual" class="form-label fw-bold">Producción anual</label>
+              </div>
+              <small class="form-text text-muted">Producción anual en (kilogramos).</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Información sobre Prácticas Agrícolas -->
+        <div class="container">
+          <p class="text-muted text-center mt-3 p-2 fw-bold">Prácticas Agrícolas</p>
+          <div class="border-bottom mb-3">
+            <label for="tipo_riego" class="fw-bold">Tipo de riego utilizado</label>
+            <select class="form-select bg-transparent border-0" aria-label="Default select example" id="tipo_riego" name="tipo_riego" required>
+              <option selected disabled>Seleccionar...</option>
+              <option value="Manual">Manual</option>
+              <option value="Goteo">Por goteo</option>
+              <option value="aspersion">Por aspersión</option>
+              <option value="Microaspersion">Microaspersión</option>
+              <option value="Gravedad">Por gravedad</option>
+              <option value="Surcos">Riego por surcos</option>
+              <option value="Subterraneo">Riego subterráneo</option>
+              <option value="Pivotante">Riego pivotante</option>
+              <option value="Manta">Riego por manta</option>
+              <option value="Automatizado">Riego automatizado</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="border-bottom mb-3">
+                <label for="fertilizantes" class="fw-bold">Tipos de Fertilizantes</label>
+                <select id="fertilizantes" name="fertilizantes" class="form-select bg-transparent border-0" required>
+                  <option selected disabled>Seleccionar...</option>
+                  <optgroup label="Organicos">
+                    <option value="compost">Compost</option>
+                    <option value="estiercol">Estiércol</option>
+                    <option value="humus-de-lombriz">Humus de lombriz</option>
+                    <option value="abono-verde">Abono verde</option>
+                    <option value="biofertilizantes">Biofertilizantes</option>
+                  </optgroup>
+                  <optgroup label="Inorganicos">
+                    <option value="nitrato-de-amonio">Nitrato de amonio</option>
+                    <option value="superfosfato">Superfosfato</option>
+                    <option value="sulfato-de-potasio">Sulfato de potasio</option>
+                    <option value="urea">Urea</option>
+                    <option value="cloruro-de-potasio">Cloruro de potasio</option>
+                    <option value="fosfato-diamonico">Fosfato diamónico (DAP)</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating border-bottom mb-1">
+                <input type="number" class="form-control bg-transparent border-0" id="cantidad" placeholder="cantidad"
+                  name="cantidad" required>
+                <label for="cantidad" class="form-label fw-bold">Cantidad</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="border-bottom mb-3">
+                <label for="pesticidas" class="fw-bold">Tipos de Pesticidas</label>
+                <select id="pesticidas" name="pesticidas" class="form-select bg-transparent border-0" required>
+                  <option selected disabled>Seleccionar...</option>
+                  <optgroup label="Insecticidas">
+                    <option value="insecticidas-quimicos">Insecticidas químicos</option>
+                    <option value="insecticidas-biologicos">Insecticidas biológicos</option>
+                  </optgroup>
+                  <optgroup label="Fungicidas">
+                    <option value="fungicidas-quimicos">Fungicidas químicos</option>
+                    <option value="fungicidas-biologicos">Fungicidas biológicos</option>
+                  </optgroup>
+                  <optgroup label="Herbicidas">
+                    <option value="herbicidas-de-contacto">Herbicidas de contacto</option>
+                    <option value="herbicidas-sistemicos">Herbicidas sistémicos</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating border-bottom mb-1">
+                <input type="number" class="form-control bg-transparent border-0" id="frecuencia"
+                  placeholder="frecuencia" name="frecuencia" required>
+                <label for="frecuencia" class="form-label fw-bold">Frecuencia</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-bottom mb-3">
+            <label for="control-plagas" class="fw-bold">Métodos de Control de Plagas y Enfermedades</label>
+            <select id="control-plagas" name="control-plagas" class="form-select bg-transparent border-0" required>
+              <option selected disabled>Seleccionar...</option>
+              <optgroup label="Control biológico">
+                <option value="depredadores-naturales">Uso de depredadores naturales</option>
+                <option value="uso-de-parasitoides">Uso de parasitoides</option>
+              </optgroup>
+              <optgroup label="Control cultural">
+                <option value="rotacion-de-cultivos">Rotación de cultivos</option>
+                <option value="eliminacion-de-plantas-infectadas">Eliminación de plantas infectadas</option>
+              </optgroup>
+              <optgroup label="Control químico">
+                <option value="uso-de-pesticidas">Uso de pesticidas</option>
+              </optgroup>
+              <optgroup label="Control mecánico">
+                <option value="trampas">Trampas</option>
+                <option value="barreras-fisicas">Barreras físicas</option>
+              </optgroup>
+              <optgroup label="Control integrado">
+                <option value="combinacion-de-metodos">Combinación de métodos anteriores</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="border-bottom mb-3">
+            <label for="sombra" class="fw-bold">Manejo de Sombra</label>
+            <select id="sombra" name="sombra" class="form-select bg-transparent border-0"
+              aria-label="Default select example" required>
+              <option selected disabled>Seleccionar...</option>
+              <option value="Guamo">Guamo</option>
+              <option value="Cedro">Cedro</option>
+              <option value="Roble">Roble</option>
+              <option value="Poro">Poró</option>
+              <option value="Nogal-cafetero">Nogal cafetero</option>
+              <option value="Madero-negro">Madero negro</option>
+              <option value="Musaceas">Musáceas (banano, plátano)</option>
+              <option value="Frutales">Frutales (aguacate, mango, cítricos)</option>
+              <option value="Aliso">Aliso</option>
+            </select>
+          </div>
+
+          <label for="porcentaje" class="form-label fw-bold">Porcentaje de sombra</label>
+          <input type="range" class="form-range" id="porcentaje" name="porcentaje" min="0" max="100" value="0"
+            title="Seleccione el porcentaje de sombra">
+
+          <div class="mt-2">
+            <span id="porcentajeValor">0</span> %
+          </div>
+
+        </div>
+
+        <!-- Problemas Observados -->
+        <div class="container">
+          <p class="text-muted text-center mt-3 p-2 fw-bold">Problemas Observados</p>
+          <div class="border-bottom mb-3">
+            <label for="plagas" class="fw-bold">Plagas presentes</label>
+            <select id="plagas" name="plagas" class="form-select bg-transparent border-0"
+              aria-label="Default select example" required>
+              <option selected disabled>Seleccionar...</option>
+              <option value="Broca">Broca del café (Hypothenemus hampei)</option>
+              <option value="Minador-hoja">Minador de la hoja (Leucoptera coffeella)</option>
+              <option value="Escamas">Escamas (Coccus viridis)</option>
+              <option value="Acaro">Ácaro rojo (Oligonychus coffeae)</option>
+              <option value="Gorgojo">Gorgojo del café (Araecerus coffeae)</option>
+              <option value="ninguna">N/A</option>
+            </select>
+          </div>
+          <div class="border-bottom mb-3">
+            <label for="enfermedades" class="fw-bold">Enfermedades presentes</label>
+            <select id="enfermedades" name="enfermedades" class="form-select bg-transparent border-0"
+              aria-label="Default select example" required>
+              <option selected disabled>Seleccionar...</option>
+              <option value="Roya-cafe">Roya del café (Hemileia vastatrix)</option>
+              <option value="Antracnosis">Antracnosis (Colletotrichum spp)</option>
+              <option value="Ojo-gallo">Ojo de gallo (Mycena citricolor)</option>
+              <option value="Marchitez">Marchitez del café (Fusarium spp)</option>
+              <option value="Nematodos">Nematodos (Meloidogyne spp, Pratylenchus spp)</option>
+              <option value="ninguna">N/A</option>
+            </select>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="border-bottom mb-3">
+                <label for="sintomas_visibles" class="fw-bold">Síntomas visibles en las plantas</label>
+                <select id="sintomas_visibles" name="sintomas_visibles" class="form-select bg-transparent border-0"
+                  aria-label="Default select example" required>
+                  <option selected disabled>Seleccionar...</option>
+                  <option value="Hojas amarillas">Hojas amarillas</option>
+                  <option value="Manchas">Manchas</option>
+                  <option value="Marchitez">Marchitez</option>
+                  <option value="Defoliación">Defoliación</option>
+                  <option value="Enanismo">Enanismo</option>
+                  <option value="Necrosis">Necrosis</option>
+                  <option value="ninguna">N/A</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="border-bottom mb-3">
+                <label for="problemas-crecimiento" class="fw-bold">Problemas de Crecimiento</label>
+                <select id="problemas-crecimiento" name="problemas-crecimiento"
+                  class="form-select bg-transparent border-0" aria-label="Default select example" required>
+                  <option selected disabled>Seleccionar...</option>
+                  <option value="Lento">Lento</option>
+                  <option value="Irregular">Irregular</option>
+                  <option value="ninguna">N/A</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center pt-3">
+          <button id="evaluar" class="fw-bold border-0 evaluar me-5" type="submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Evaluar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- scripts js -->
+<script type="text/javascript" src="{% static 'js/cultivo.js' %}"></script>
+
+{% endblock %}

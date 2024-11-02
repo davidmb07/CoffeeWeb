@@ -1,0 +1,134 @@
+{% extends "./base.html" %}
+
+{% load static %}
+
+{% block title %} CoffeeWeb - Mi Perfil {% endblock %}
+
+{% block content %}
+<!-- Bootstrap CSS v5.3.2 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<!-- styles css -->
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/base.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/perfil.css' %}">
+<!-- content -->
+<section class="container">
+
+  <section class="container">
+
+    <section class="p-5 mb-5 header position-relative">
+      <!-- Botón de editar perfil o seguir -->
+      <div class="position-absolute top-0 end-0 mt-3">
+        {% if request.user == usuario.user %}
+          <button type="button" class="btn btn-lg border-0" data-url="{% url 'editar_perfil' %}" id="editarperfil">
+            <i class="bi bi-pencil-square lead"></i>
+          </button>
+        {% else %}
+          <button type="button" class="btn btn-lg border-0" data-url="{% url 'seguir_perfil' usuario.id %}" id="seguirperfil">
+            <i class="bi bi-person-plus-fill lead"></i>
+          </button>
+        {% endif %}
+      </div>
+
+      <!-- Botón de compartir perfil -->
+       <!--
+      <div class="position-absolute top-0 end-0 mt-5 pt-3">
+        <div class="dropup">
+            <button id="compartirPerfil" class="btn btn-lg border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-share lead"></i>
+            </button>
+            <ul class="dropdown-menu border-0">
+                <li><a class="dropdown-item" href="#" onclick="copiarEnlace('{{ usuario.slug }}')">Copiar enlace</a></li>
+                <li><a class="dropdown-item" href="#" onclick="compartirWhatsApp('{{ usuario.slug }}')">Compartir en WhatsApp</a></li>
+                <li><a class="dropdown-item" href="#" onclick="compartirMessenger('{{ usuario.slug }}')">Compartir en Messenger</a></li>
+            </ul>
+        </div>
+      </div>
+      -->
+  
+      <!-- Información del usuario -->
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center text-md-start mb-4 mb-md-0">
+          <div class="perfil-picture rounded-circle position-relative overflow-hidden">
+            {% if usuario.foto_perfil %}
+              <img src="{{ usuario.foto_perfil.url }}" alt="Foto de perfil" class="img-fluid rounded-circle">
+            {% else %}
+              <img src="{{ request.user.usuario.get_default_foto_perfil_url }}" alt="Avatar por defecto" class="img-fluid rounded-circle">
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="container-header">
+            <div class="nombre mb-2">
+              <h2>{{ usuario.nombre }} {{ usuario.apellido }}</h2>
+            </div>
+            <div class="header-body d-flex flex-wrap mb-2">
+              <p class="text-muted me-3 mb-0"><b>16</b> Publicaciones</p>
+              <p class="text-muted me-3 mb-0"><b>350</b> Seguidores</p>
+              <p class="text-muted mb-0"><b>56</b> Seguidos</p>
+            </div>
+            <div class="mb-2">
+              <p class="tipo-cuenta text-muted mb-2"><i class="fa-solid {{ icono_tipo_user }} me-2"></i>{{ tipo_user }}</p>
+              <p class="description mb-0">{{ usuario.descripcion }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </section>
+
+  <section class="content">
+    <div class="container container-nav pt-2">
+      <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+          <a class="nav-link active text-muted bg-transparent" aria-current="page" href="#"><i class="far fa-images me-2 lead"></i>Publicaciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-muted bg-transparent" href="#"><i class="bi bi-bookmarks me-2 lead"></i>Guardadas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-muted bg-transparent" href="#"><i class="fa-solid fa-tag me-2 lead"></i>Mensiones</a>
+        </li>
+      </ul>
+    </div>
+    <!-- Galería de imágenes estilo Instagram -->
+    <div class="container">
+      <div class="gallery">
+        <div>
+          <img src="https://via.placeholder.com/300" alt="Publicación 1">
+        </div>
+        <div>
+          <img src="https://via.placeholder.com/300" alt="Publicación 2">
+        </div>
+        <div>
+          <img src="https://via.placeholder.com/300" alt="Publicación 3">
+        </div>
+        <div>
+          <img src="https://via.placeholder.com/300" alt="Publicación 4">
+        </div>
+        <div>
+          <img src="https://via.placeholder.com/300" alt="Publicación 5">
+        </div>
+        <div>
+          <img src="https://via.placeholder.com/300" alt="Publicación 6">
+        </div>
+        <div>
+          <img src="https://via.placeholder.com/300" alt="Publicación 7">
+        </div>
+        <div>
+          <img src="https://via.placeholder.com/300" alt="Publicación 8">
+        </div>
+        <div>
+          <img src="https://via.placeholder.com/300" alt="Publicación 9">
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<script type="text/javascript" src="{% static 'js/perfil.js' %}" defer></script>
+
+{% endblock %}

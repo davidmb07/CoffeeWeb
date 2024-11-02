@@ -1,0 +1,303 @@
+:root{
+  --color-success: #88ab00;
+}
+
+/* Estilos comunes */
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: .05rem;
+  list-style: none;
+  text-decoration: none;
+}
+
+.p-6 {
+  padding: 4rem 7rem;
+}
+
+
+.form-control {
+  border-radius: .2rem;
+  padding: .8rem 1rem;
+}
+
+.register-bg {
+  background-image: url(../IMG/users.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.testimonial {
+  bottom: 10px;
+  background-color: #00000099;
+  color: #ffffff;
+  border-radius: 25px;
+  margin: auto 10px;
+  text-align: center;
+}
+
+form .registrarse{
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: var(--color-success);
+  font-size: 16px;
+  overflow: hidden;
+  transition: .5s;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+form .registrarse:hover,
+form .registrarse:active{
+  background-color: var(--color-success);
+  color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 15px 7px var(--color-success);
+}
+
+form .registrarse span{
+  position: absolute;
+  display: block;
+}
+
+form .registrarse span:nth-child(1){
+  top: 0;
+  left: -100%;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-success));
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1{
+  0%{
+    left: -100%;
+  }
+  50%,100%{
+    left: 100%;
+  }
+}
+
+form .registrarse span:nth-child(2){
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--color-success));
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: .25s;
+}
+
+@keyframes btn-anim2{
+  0%{
+    top: -100%;
+  }
+  50%,100%{
+    top: 100%;
+  }
+}
+
+form .registrarse span:nth-child(3){
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, var(--color-success));
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: .5s;
+}
+
+@keyframes btn-anim3{
+  0%{
+    right: -100%;
+  }
+  50%,100%{
+    right: 100%;
+  }
+}
+
+form .registrarse span:nth-child(4){
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, var(--color-success));
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: .75s;
+}
+
+@keyframes btn-anim4{
+  0%{
+    bottom: -100%;
+  }
+  50%,100%{
+    bottom: 100%;
+  }
+}
+
+#login,
+#terminos,
+#condiciones {
+  text-decoration: none;
+}
+
+#login:hover {
+  text-decoration: underline;
+}
+
+#terminos:hover {
+  text-decoration: underline;
+}
+
+#condiciones:hover {
+  text-decoration: underline;
+}
+
+#togglePassword1,
+#togglePassword2 {
+  cursor: pointer;
+}
+
+ /* Estilos para el cuadro de diálogo */
+ #overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  z-index: 999;
+}
+
+#dialog {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 1000;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s; /* Animación de entrada */
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translate(-50%, -60%);
+  }
+  to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+  }
+}
+
+#dialog svg {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+#dialog p {
+  font-size: 1.2em;
+}
+
+@media (max-width: 575.98px) {
+  .p-6 {
+      padding: 2rem;
+  }
+
+  .width-100 {
+      width: 100%;
+  }
+}
+
+@media (max-width: 1200px) { 
+  .register-bg {
+      min-height: 50vh;
+  }
+}
+
+/* Modo Luz */
+[data-theme='light'] {
+  --bp-color: #ffffff; /* color blanco en modo luz */
+  --bg-color: #f8f8ff; /* Fondo del main en modo luz */
+  --text-color: #905010; /* Color del texto en modo luz */
+
+  html, body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  .content{
+    background-color: var(--bg-color);
+  }
+
+  #login,
+  #terminos,
+  #condiciones{
+    color: var(--text-color);
+  }
+
+  .form-text{
+    color: var(--text-color);
+  }
+
+  #dialog {
+    background-color: var(--bp-color)
+  }
+
+  #dialog p {
+    color: var(--text-color)
+  }
+
+}
+
+/* Modo Oscuro */
+[data-theme='dark'] {
+  --bg-color: #343a40; /* Fondo del offcanvas en modo oscuro */
+  --text-color: #ffffff; /* Color del texto en modo oscuro */
+  --muted-color: #848484; /* Color del texto muted */
+
+  html, body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  .content{
+    background-color: var(--bg-color);
+  }
+
+  #login,
+  #terminos,
+  #condiciones{
+    color: var(--text-color);
+  }
+
+  .form-text{
+    color: var(--text-color);
+  }
+
+  .text-muted{
+    color: var(--muted-color) !important;
+  }
+
+  #dialog{
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  #dialog {
+    background-color: var(--bg-color)
+  }
+
+  #dialog p {
+    color: var(--text-color)
+  }
+
+}

@@ -1,0 +1,67 @@
+{% load static %}
+
+<!-- styles css -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/stories.css' %}">
+
+<div class="container-fluid">
+    <div class="card mb-2 shadow">
+        <div class="card-body">
+            <div class="stories-container d-flex flex-nowrap overflow-auto position-relative"> 
+                <!-- Elemento para agregar nueva historia (siempre visible, ahora en el lado izquierdo) -->
+                <div class="story rounded me-3 position-relative add-story">
+                    {% if request.user.usuario.foto_perfil %}
+                        <img src="{{ request.user.usuario.foto_perfil.url }}" alt="Profile Picture" class="img-fluid story-image">
+                    {% else %}
+                        <img src="{% static 'img/profile.jpg' %}" alt="Profile Picture" class="img-fluid story-image">
+                    {% endif %}
+                    <div class="story-overlay position-absolute top-0 start-0 d-flex flex-column justify-content-center align-items-center text-center p-3">
+                        <i class="bi bi-plus-lg text-white"></i>
+                        <h6 class="text-white mt-2">Agregar</h6>
+                    </div>
+                </div>
+  
+                <!-- Historias de otros usuarios -->
+                <div class="story rounded me-3 position-relative">
+                    <img src="{% static 'img/publicacion1.jpeg' %}" class="img-fluid rounded" alt="User21X">
+                    <div class="story-overlay position-absolute top-0 start-0 d-flex flex-column justify-content-between p-3">
+                        <div class="d-flex align-items-center">
+                            <div class="profile-picture1 rounded-circle small me-2"></div>
+                            <h6 class="text-white mb-0">User21X</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="story rounded me-3 position-relative">
+                    <img src="{% static 'img/publicacion1.jpeg' %}" class="img-fluid rounded" alt="User21X">
+                    <div class="story-overlay position-absolute top-0 start-0 d-flex flex-column justify-content-between p-3">
+                        <div class="d-flex align-items-center">
+                            <div class="profile-picture1 rounded-circle small me-2"></div>
+                            <h6 class="text-white mb-0">User21X</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="story rounded me-3 position-relative">
+                    <img src="{% static 'img/publicacion1.jpeg' %}" class="img-fluid rounded" alt="User21X">
+                    <div class="story-overlay position-absolute top-0 start-0 d-flex flex-column justify-content-between p-3">
+                        <div class="d-flex align-items-center">
+                            <div class="profile-picture1 rounded-circle small me-2"></div>
+                            <h6 class="text-white mb-0">User21X</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="story rounded me-3 position-relative">
+                    <img src="{% static 'img/publicacion1.jpeg' %}" class="img-fluid rounded" alt="User21X">
+                    <div class="story-overlay position-absolute top-0 start-0 d-flex flex-column justify-content-between p-3">
+                        <div class="d-flex align-items-center">
+                            <div class="profile-picture1 rounded-circle small me-2"></div>
+                            <h6 class="text-white mb-0">User21X</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Más historias aquí -->
+                
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="{% static 'js/stories.js' %}" defer></script>

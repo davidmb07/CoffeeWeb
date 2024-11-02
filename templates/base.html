@@ -1,0 +1,252 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-co">
+<head meta charset="utf-8">
+    <!-- Codificación de caracteres -->
+    <meta charset="utf-8">
+    <!-- Configuración de viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Google fonts -->
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+    </style>
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <!-- Bootstrap CSS v5.3.2 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- styles css -->
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <nav class="navbar navbar-dark fixed-top border-bottom">
+                <div class="container-fluid d-flex align-items-center justify-content-between">
+                    <div class="d-flex flex-grow-1 align-items-center">
+                        <div id="logo" class="d-flex align-items-center flex-shrink-0 me-4">
+                            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+                                <img src="{% static 'img/logo.png' %}" alt="Logo" class="me-2">
+                                <h2 class="fw-bold mb-0" id="nombre" translate="no">CoffeeWeb</h2>
+                            </a>
+                        </div>
+                        <form action="{% url 'buscar_usuarios' %}" method="get" class="d-flex position-relative flex-grow-1 mx-3 me-4" role="search" id="searchForm">
+                            <div class="position-relative w-100">
+                                <input class="form-control bg-grey rounded-pill ps-5 border-0" type="text"  name="q" placeholder="Buscar" aria-label="Buscar" value="{{ query }}">
+                                <span class="position-absolute top-50 translate-middle-y start-0 ps-2">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                            </div>
+                        </form>
+                        <div class="ms-auto w-auto d-flex align-items-center flex-shrink-0 me-4 text-decoration-none">
+                            <a class="me-3 lead" href="#" id="chat">
+                                <i class="bi bi-chat"></i>
+                            </a>
+                            <a class="lead" href="#" id="notificaciones">
+                                <i class="bi bi-bell-fill"></i>
+                            </a>
+                        </div>
+                        <button class="navbar-toggler d-flex align-items-center flex-shrink-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                        <div class="offcanvas-header border-bottom">
+                            <h5 class="offcanvas-title text-muted" id="title">Menu</h5>
+                            <button type="button" class="navbar-toggler" data-bs-dismiss="offcanvas" aria-label="Close">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                <li class="nav-item">
+                                    <a class="nav-link profile-link" href="{% url 'mi_perfil' %}">
+                                        {% if request.user.usuario.foto_perfil %}
+                                            <img src="{{ request.user.usuario.foto_perfil.url }}" alt="Profile Picture" class="img-fluid rounded-circle profile-image me-3">
+                                        {% else %}
+                                            <img src="{% static 'img/profile.jpg' %}" alt="Profile Picture" class="img-fluid rounded-circle profile-image me-3">
+                                        {% endif %}
+                                        {{ user.usuario.nombre }} {{ user.usuario.apellido }}
+                                    </a>
+                                </li>
+                                <li class="mb-3">
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+                                        <i class="bi bi-house-door lead me-2"></i> Inicio
+                                    </a>
+                                </li>
+                                {% if tipo_usuario == "AdminCooperativa" or tipo_usuario == "UserCooperativa" %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">
+                                            <i class="bi bi-building lead me-2"></i> Cooperativa
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if tipo_usuario == "Caficultor" %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'mis_terrenos' %}">
+                                            <i class="bi bi-geo-alt lead me-2"></i> Terrenos
+                                        </a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-graph-up lead ms-0 me-2"></i> Análisis
+                                            <i class="bi bi-chevron-down lead"></i>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'cultivo' %}">
+                                                    <i class="fas fa-seedling lead me-2"></i> Análisis de cultivo
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'suelo' %}">
+                                                    <i class="bi bi-geo-alt lead me-2"></i> Análisis de suelo
+                                                </a>
+                                            </li>
+                                            <li class="mb-3">
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'resultados' %}">
+                                                    <i class="bi bi-clipboard-check lead me-2"></i> Resultados
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% elif tipo_usuario == 'AdminCoffeeWeb' %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'mis_terrenos' %}">
+                                            <i class="bi bi-geo-alt lead me-2"></i> Terrenos
+                                        </a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-graph-up lead ms-0 me-2"></i> Análisis
+                                            <i class="bi bi-chevron-down lead"></i>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="bi bi-clipboard-check lead me-2"></i> Resultados
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                                <li class="nav-item">
+                                    <a class="nav-link" translate="no" href="#">
+                                        <i class="fa-brands fa-shopify lead me-2"></i> CoffeeShop
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'nosotros' %}">
+                                        <i class="bi bi-people-fill lead me-2"></i> Nosotros
+                                    </a>
+                                </li>
+                                <li class="mb-3">
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <a class="nav-link dropdown-toggle" role="button" id="configuracion" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-circle-half lead me-2 ms-0"></i> Apariencia
+                                            <i class="bi bi-chevron-down lead"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="configuracion">
+                                            <li>
+                                                <a class="dropdown-item" href="#" id="modo-claro">
+                                                    <i class="bi bi-sun lead me-2"></i> Modo Luz
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#" id="modo-oscuro">
+                                                    <i class="bi bi-moon lead me-2"></i> Modo Oscuro
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#" id="modo-auto">
+                                                    <i class="bi bi-circle-half lead me-2"></i> Auto
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-question-circle-fill lead me-2 ms-0"></i> Ayuda y Soporte tecnico
+                                        <i class="bi bi-chevron-down lead"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="bi bi-inbox-fill lead me-2"></i> Buzon de ayuda
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fa-solid fa-book lead me-2"></i> Condiciones y politicas
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-gear lead me-2 ms-0"></i> Configuración
+                                        <i class="bi bi-chevron-down lead"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="bi bi-shield-lock-fill lead me-2"></i> Cambiar Contraseña
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="mb-3">
+                                    <hr class="dropdown-divider">
+                                </li>
+                            </ul>
+                            <form action="{% url 'logout' %}" method="post" class="d-inline p-0">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link logout-link border-0 p-2 w-100">
+                                    <i class="bi bi-box-arrow-right lead"></i>
+                                    Cerrar Sesión
+                                </button>
+                            </form>
+                        </div>
+                        <footer class="footer mt-auto text-center">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6 mt-3">
+                                        <p class="text-muted mb-0">Síguenos en</p>
+                                        <p class="social-icons">
+                                            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                            <a href="#" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                                            <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="py-3 mx-0">
+            {% block content %} {% endblock %}
+        </main>
+    </div>
+    
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- scripts js -->
+    <script type="text/javascript" src="{% static 'js/base.js' %}" defer></script>
+</body>
+</html>

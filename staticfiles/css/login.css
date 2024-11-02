@@ -1,0 +1,318 @@
+:root{
+  --color-success: #88ab00;
+}
+
+/* Estilos comunes */
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+body{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+}
+
+#logo{
+  height: 70px;
+}
+
+.header{
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-control:focus{
+  box-shadow: none;
+}
+
+.user-box{
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.user-box input{
+  border: none;
+  border-bottom: 2px solid #848484;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+  padding-right: 2.5rem;
+}
+
+.user-box label{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.5s ease-out; /* Transición suave */
+    transform-origin: top left; /* Importante para el efecto de escalado */
+    transform: translateY(20px) scale(0.8);
+}
+
+.user-box input:focus ~ label,
+.user-box input:not(:placeholder-shown) ~ label {
+  border: none; /* Elimina el borde inferior al enfocar */
+  background-color: transparent;
+  outline: none; /* Elimina el borde azul de selección */
+  transform: translateY(0) scale(1); /* Movimiento y escala cuando está enfocado o tiene contenido */
+}
+
+.user-box input:focus ~ label,
+.user-box input:valid ~ label{
+  top: -20px;
+  left: 0;
+  font-size: 12px;
+  transform: translateY(0) scale(1); /* Movimiento y escala cuando el input es válido (tiene contenido) */
+}
+
+#togglePassword{
+  cursor: pointer;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  position: absolute;
+}
+
+form .acceso{
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: var(--color-success);
+  font-size: 16px;
+  overflow: hidden;
+  transition: .5s;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+form .acceso:hover,
+form .acceso:active{
+  background-color: var(--color-success);
+  color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 15px 7px var(--color-success);
+}
+
+form .acceso span{
+  position: absolute;
+  display: block;
+}
+
+form .acceso span:nth-child(1){
+  top: 0;
+  left: -100%;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-success));
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1{
+  0%{
+    left: -100%;
+  }
+  50%,100%{
+    left: 100%;
+  }
+}
+
+form .acceso span:nth-child(2){
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--color-success));
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: .25s;
+}
+
+@keyframes btn-anim2{
+  0%{
+    top: -100%;
+  }
+  50%,100%{
+    top: 100%;
+  }
+}
+
+form .acceso span:nth-child(3){
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, var(--color-success));
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: .5s;
+}
+
+@keyframes btn-anim3{
+  0%{
+    right: -100%;
+  }
+  50%,100%{
+    right: 100%;
+  }
+}
+
+form .acceso span:nth-child(4){
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, var(--color-success));
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: .75s;
+}
+
+@keyframes btn-anim4{
+  0%{
+    bottom: -100%;
+  }
+  50%,100%{
+    bottom: 100%;
+  }
+}
+
+#emailHelp {
+  text-decoration: none;
+}
+
+#emailHelp:hover {
+  text-decoration: underline;
+}
+
+#registrarse {
+  text-decoration: none;
+}
+
+#registrarse:hover {
+  text-decoration: underline;
+}
+
+#togglePassword{
+  cursor: pointer;
+}
+
+/*carrusel*/
+.img-1{
+  background-image: url(../IMG/login1.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+.img-2{
+  background-image: url(../IMG/login2.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+
+.img-3{
+  background-image: url(../IMG/login3.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+
+.img-4{
+  background-image: url(../IMG/login4.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-caption{
+  background-color: #00000099;
+  color: #ffffff;
+  border-radius: 25px;
+}
+
+.carousel-caption h5{
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.carousel-caption p{
+  font-size: .8rem;
+}
+
+/* Modo Luz */
+[data-theme='light'] {
+  --bg-color: #f8f8ff; /* Fondo del main en modo luz */
+  --bp-color: #ffffff; /* Fondo del section en modo luz */
+  --text-color: #905010; /* Color del texto en modo luz */
+
+  html, body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  .login{
+    background: var(--bg-color);
+  }
+
+  .header{
+    background: var(--bp-color);
+  }
+
+  #emailHelp {
+    color: var(--text-color);
+  }
+
+  #registrarse{
+    color: var(--text-color);
+  }
+
+  .form-control{
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  .form-control:focus{
+    background-color: var(--bg-color);
+  }
+
+}
+
+/* Modo Oscuro */
+[data-theme='dark'] {
+  --bg-color: #343a40; /* Fondo del offcanvas en modo oscuro */
+  --text-color: #ffffff; /* Color del texto en modo oscuro */
+  --muted-color: #848484; /* Color del texto muted */
+
+  html, body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  .login{
+    background: var(--bg-color);
+  }
+
+  .header{
+    background: var(--bg-color);
+  }
+
+  .text-muted{
+    color: var(--muted-color) !important;
+  }
+
+  #emailHelp {
+    color: var(--text-color);
+  }
+
+  #registrarse{
+    color: var(--text-color);
+  }
+
+  .form-control{
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  .form-control:focus{
+    background-color: var(--bg-color);
+  }
+
+}

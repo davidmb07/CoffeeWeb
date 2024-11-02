@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %} Evaluación de Cultivo {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="fw-bold text-center">Mis Evaluaciones a Cultivos</h1>
+    <ul class="list-group">
+        {% for evaluacion in evaluaciones %}
+        <li class="list-group-item m-2">
+            <h5>Evaluación del cultivo</h5>
+            <p><strong>Variedad de café:</strong> {{ evaluacion.variedad_cafe }}</p>
+            <p><strong>Altitud:</strong> {{ evaluacion.altitud }} m</p>
+            <p><strong>Área cultivada:</strong> {{ evaluacion.area_cultivada }} ha</p>
+            <p><strong>Edad del cultivo:</strong> {{ evaluacion.edad_cultivo }} años</p>
+            <p><strong>Densidad de plantación:</strong> {{ evaluacion.densidad_plantacion }} plantas/ha</p>
+            <p><strong>Sistema de cultivo:</strong> {{ evaluacion.sistema_cultivo }}</p>
+            <p><strong>Fecha de última cosecha:</strong> {{ evaluacion.date_ultima_cosecha }}</p>
+            <p><strong>Producción anual:</strong> {{ evaluacion.produccion_anual }} kg/ha</p>
+            <p><strong>Tipo de riego:</strong> {{ evaluacion.tipo_riego }}</p>
+            <p><strong>Fertilizantes:</strong> {{ evaluacion.fertilizantes }}</p>
+            <p><strong>Cantidad:</strong> {{ evaluacion.cantidad }}</p>
+            <p><strong>Pesticidas:</strong> {{ evaluacion.pesticidas }}</p>
+            <p><strong>Frecuencia:</strong> {{ evaluacion.frecuencia }}</p>
+            <p><strong>Control de plagas:</strong> {{ evaluacion.control_plagas }}</p>
+            <p><strong>Sombra:</strong> {{ evaluacion.sombra }}</p>
+            <p><strong>Porcentaje de sombra:</strong> {{ evaluacion.porcentaje }}%</p>
+            <p><strong>Plagas:</strong> {{ evaluacion.plagas }}</p>
+            <p><strong>Enfermedades:</strong> {{ evaluacion.enfermedades }}</p>
+            <p><strong>Síntomas visibles:</strong> {{ evaluacion.sintomas_visibles }}</p>
+            <p><strong>Problemas de crecimiento:</strong> {{ evaluacion.problemas_crecimiento }}</p>
+            <p><strong>Rendimiento esperado:</strong> {{ evaluacion.rendimiento_esperado }} kg/ha</p>
+            <p><strong>Sugerencias:</strong> {{ evaluacion.sugerencias }}</p>
+            <p><strong>Posibles problemas futuros:</strong> {{ evaluacion.posibles_problemas_futuros }}</p>
+            <p><strong>Fecha:</strong> {{ evaluacion.fecha }}</p>
+        </li>
+        {% empty %}
+        <li class="list-group-item">No tienes evaluaciones para los cultivos guardadas.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="container">
+    <h1 class="fw-bold text-center">Mis Evaluaciones a Terrenos</h1>
+</div>
+{% endblock %}

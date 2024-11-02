@@ -1,0 +1,132 @@
+{% extends "base.html" %} 
+
+{% load static %}
+
+{% block title %} CoffeeWeb - Nosotros {% endblock %} 
+
+{% block content %}
+<!-- Bootstrap CSS v5.3.2 -->
+<link href="https//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons CSS -->
+<link href="https//cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="https//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<!-- styles css -->
+<link rel="stylesheet" type="text/css" href="{% static '../static/CSS/base.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static '../static/CSS/nosotros.css' %}">
+<!-- content -->
+  <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <section class="mision mb-5">
+                    <h1 class="fw-bold titulos m-3"><i class="fas fa-bullseye"></i> Misión</h1>
+                    <p class="mt-3">
+                        La misión de CoffeeWeb es revolucionar la forma en que los agricultores abordan el cultivo de café, 
+                        proporcionando una herramienta accesible e innovadora que utilice la inteligencia artificial 
+                        para evaluar la idoneidad del suelo.
+                    </p>
+                  </section>
+                  <section class="vision mb-5">
+                    <h1 class="fw-bold titulos m-3"><i class="fa-solid fa-binoculars"></i> Visión</h1>
+                    <p class="mt-3">
+                        Nuestra visión es ser líderes en la transformación sostenible del cultivo de café orgánico a nivel mundial, 
+                        creando un futuro donde los agricultores, mediante el acceso fácil y rápido a la información, puedan tomar 
+                        decisiones informadas para cultivar café orgánico de alta calidad; convirtiéndonos en la plataforma de 
+                        referencia que impulsa la eficiencia, la sostenibilidad y la rentabilidad en la industria cafetalera, 
+                        contribuyendo así a la salud del planeta y al bienestar de las comunidades agrícolas.
+                    </p>
+                  </section>
+                  <section class="metas">
+                    <h1 class="fw-bold titulos m-3"><i class="fas fa-trophy"></i> Metas</h1>
+                        <h2 class="fw-bold subtitulos mt-5">Desarrollo Tecnológico</h2>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4">Integrar IA avanzada</h3> 
+                                <p class="mt-3">
+                                    Desarrollar e implementar algoritmos de inteligencia artificial de vanguardiapara evaluar con 
+                                    precisión la idoneidad del suelo para el cultivo de café.
+                                </p>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Plataforma accesible</h3>
+                                <p class="mt-3">
+                                    Crear una plataforma fácil de usar y accesible desde múltiples dispositivos (móviles, tablets, 
+                                    computadoras) para que los agricultores puedan acceder a la información en cualquier momento y 
+                                    lugar.
+                                </p>
+                        <h2 class="fw-bold subtitulos mt-5">Expansión del Mercado</h2>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Alcance global</h3>
+                                <p class="mt-3">
+                                    Expandir la presencia de CoffeeWeb a nivel mundial, comenzando por los principales países 
+                                    productores de café, y luego ampliando a otras regiones.
+                                </p>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Asociaciones estratégicas</h3>
+                                <p class="mt-3">
+                                    Establecer alianzas con organizaciones agrícolas, cooperativas de café y gobiernos locales para 
+                                    promover el uso de la plataforma entre los agricultores.
+                                </p>
+                        <h2 class="fw-bold subtitulos mt-5">Educación y Capacitación</h2>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Programas de formación</h3>
+                                <p class="mt-3">
+                                    Desarrollar programas educativos y materiales de capacitación para enseñar a los agricultores 
+                                    cómo utilizar la plataforma y aplicar las recomendaciones de la IA.
+                                </p>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Soporte técnico</h3>
+                                <p class="mt-3">
+                                    Ofrecer soporte técnico continuo y asistencia personalizada para los usuarios de la plataforma.
+                                </p>
+                        <h2 class="fw-bold subtitulos mt-5">Innovación en la Agricultura Sostenible</h2>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Prácticas sostenibles</h3>
+                                <p class="mt-3">
+                                    Promover y facilitar prácticas agrícolas sostenibles que reduzcan el impacto ambiental y mejoren 
+                                    la calidad del café orgánico.
+                                </p>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Investigación y desarrollo</h3>
+                                <p class="mt-3">
+                                    Invertir en la investigación y desarrollo de nuevas tecnologías y métodos agrícolas que mejoren la 
+                                    sostenibilidad y eficiencia del cultivo de café.
+                                </p>
+                        <h2 class="fw-bold subtitulos mt-5">Mejora de la Calidad del Café</h2>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Optimización del cultivo</h3>
+                                <p class="mt-3">
+                                    Utilizar datos y análisis para ayudar a los agricultores a optimizar sus prácticas de cultivo, 
+                                    aumentando la calidad y cantidad del café producido.
+                                </p>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Certificaciones orgánicas</h3>
+                                <p class="mt-3">
+                                    Apoyar a los agricultores en la obtención de certificaciones orgánicas mediante el cumplimiento de 
+                                    estándares de calidad y sostenibilidad.
+                                </p>
+                        <h2 class="fw-bold subtitulos mt-5">Impacto Social y Comunitario</h2>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Bienestar de las comunidades</h3>
+                                <p class="mt-3">
+                                    Implementar programas que contribuyan al bienestar económico y social de las comunidades agrícolas.
+                                </p>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Empoderamiento de agricultores</h3>
+                                <p class="mt-3">
+                                    Fomentar la autonomía y el empoderamiento de los agricultores proporcionándoles las herramientas y 
+                                    conocimientos necesarios para tomar decisiones informadas.
+                                </p>
+                        <h2 class="fw-bold subtitulos mt-5">Medición y Evaluación del Impacto</h2>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> KPIs y métricas</h3>
+                                <p class="mt-3">
+                                    Establecer indicadores clave de rendimiento (KPIs) para medir el impacto de CoffeeWeb en la 
+                                    eficiencia, sostenibilidad y rentabilidad del cultivo de café.
+                                </p>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Evaluaciones periódicas</h3>
+                                <p class="mt-3">
+                                    Realizar evaluaciones periódicas para ajustar y mejorar la plataforma y sus servicios basándose en 
+                                    el feedback de los usuarios y los resultados obtenidos.
+                                </p>
+                        <h2 class="fw-bold subtitulos mt-5">Ejecución y Seguimiento</h2>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Plan de implementación</h3>
+                                <p class="mt-3">
+                                    Desarrollar un plan detallado de implementación para alcanzar estas metas, incluyendo cronogramas, 
+                                    responsables y recursos necesarios.
+                                </p>
+                            <h3 class="fw-bold text-muted d-flex d-inline-block mt-4"> Monitoreo continuo</h3>
+                                <p class="mt-3">
+                                    Establecer un sistema de monitoreo continuo para evaluar el progreso hacia las metas y hacer ajustes 
+                                    según sea necesario.
+                                </p>
+                  </section>
+            </div>
+        </div>
+    </section>
+{% endblock %}
