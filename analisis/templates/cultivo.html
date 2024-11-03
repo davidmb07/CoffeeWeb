@@ -17,7 +17,7 @@
 
 <div class="container">
   <div class="my-3 p-3 rounded shadow-sm col-md-6 mx-auto analisiscultivo">
-    <h4 class="border-bottom mb-0 text-center fw-bold text-uppercase">Análisis de Cultivos</h4>
+    <h4 class="border-bottom mb-0 text-center fw-bold text-uppercase">Análisis de Cultivo</h4>
     <div class="pt-3">
       <form action="{% url 'evaluar_cultivo' %}" method="post">
         {% csrf_token %}
@@ -41,6 +41,7 @@
                   name="altitud" value="" readonly required>
                 <label for="altitud" class="fw-bold">Altitud</label>
               </div>
+              <small class="form-text text-muted">(msnm).</small>
             </div>
             <div class="col-md-6">
               <div class="form-floating border-bottom mb-1">
@@ -195,8 +196,8 @@
             <div class="col-md-6">
               <div class="form-floating border-bottom mb-1">
                 <input type="number" class="form-control bg-transparent border-0" id="cantidad" placeholder="cantidad"
-                  name="cantidad" required>
-                <label for="cantidad" class="form-label fw-bold">Cantidad</label>
+                  name="cantidad" required step="0.1">
+                <label for="cantidad" class="form-label fw-bold">Cantidad (Kg)</label>
               </div>
             </div>
           </div>
@@ -226,7 +227,7 @@
               <div class="form-floating border-bottom mb-1">
                 <input type="number" class="form-control bg-transparent border-0" id="frecuencia"
                   placeholder="frecuencia" name="frecuencia" required>
-                <label for="frecuencia" class="form-label fw-bold">Frecuencia</label>
+                <label for="frecuencia" class="form-label fw-bold">Frecuencia (Mes)</label>
               </div>
             </div>
           </div>
