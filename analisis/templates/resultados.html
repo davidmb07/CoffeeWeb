@@ -1,46 +1,51 @@
 {% extends "base.html" %}
 
-{% block title %} Evaluación de Cultivo {% endblock %}
+{% block title %}Resultados de Evaluaciones{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h1 class="fw-bold text-center">Mis Evaluaciones a Cultivos</h1>
-    <ul class="list-group">
-        {% for evaluacion in evaluaciones %}
-        <li class="list-group-item m-2">
-            <h5>Evaluación del cultivo</h5>
-            <p><strong>Variedad de café:</strong> {{ evaluacion.variedad_cafe }}</p>
-            <p><strong>Altitud:</strong> {{ evaluacion.altitud }} m</p>
-            <p><strong>Área cultivada:</strong> {{ evaluacion.area_cultivada }} ha</p>
-            <p><strong>Edad del cultivo:</strong> {{ evaluacion.edad_cultivo }} años</p>
-            <p><strong>Densidad de plantación:</strong> {{ evaluacion.densidad_plantacion }} plantas/ha</p>
-            <p><strong>Sistema de cultivo:</strong> {{ evaluacion.sistema_cultivo }}</p>
-            <p><strong>Fecha de última cosecha:</strong> {{ evaluacion.date_ultima_cosecha }}</p>
-            <p><strong>Producción anual:</strong> {{ evaluacion.produccion_anual }} kg/ha</p>
-            <p><strong>Tipo de riego:</strong> {{ evaluacion.tipo_riego }}</p>
-            <p><strong>Fertilizantes:</strong> {{ evaluacion.fertilizantes }}</p>
-            <p><strong>Cantidad:</strong> {{ evaluacion.cantidad }}</p>
-            <p><strong>Pesticidas:</strong> {{ evaluacion.pesticidas }}</p>
-            <p><strong>Frecuencia:</strong> {{ evaluacion.frecuencia }}</p>
-            <p><strong>Control de plagas:</strong> {{ evaluacion.control_plagas }}</p>
-            <p><strong>Sombra:</strong> {{ evaluacion.sombra }}</p>
-            <p><strong>Porcentaje de sombra:</strong> {{ evaluacion.porcentaje }}%</p>
-            <p><strong>Plagas:</strong> {{ evaluacion.plagas }}</p>
-            <p><strong>Enfermedades:</strong> {{ evaluacion.enfermedades }}</p>
-            <p><strong>Síntomas visibles:</strong> {{ evaluacion.sintomas_visibles }}</p>
-            <p><strong>Problemas de crecimiento:</strong> {{ evaluacion.problemas_crecimiento }}</p>
-            <p><strong>Rendimiento esperado:</strong> {{ evaluacion.rendimiento_esperado }} kg/ha</p>
-            <p><strong>Sugerencias:</strong> {{ evaluacion.sugerencias }}</p>
-            <p><strong>Posibles problemas futuros:</strong> {{ evaluacion.posibles_problemas_futuros }}</p>
-            <p><strong>Fecha:</strong> {{ evaluacion.fecha }}</p>
-        </li>
-        {% empty %}
-        <li class="list-group-item">No tienes evaluaciones para los cultivos guardadas.</li>
-        {% endfor %}
-    </ul>
-</div>
-
-<div class="container">
-    <h1 class="fw-bold text-center">Mis Evaluaciones a Terrenos</h1>
+    <h1 class="fw-bold text-center">Resultados de Evaluaciones</h1>
+    <div class="row">
+        <!-- Evaluaciones de Cultivo -->
+        <div class="col-md-6">
+            <h2 class="fw-bold text-center">Evaluaciones de Cultivo</h2>
+            <ul class="list-group">
+                {% for evaluacion in evaluaciones %}
+                <li class="list-group-item m-2">
+                    <h5>Evaluación del cultivo</h5>
+                    <p><strong>Variedad de café:</strong> {{ evaluacion.variedad_cafe }}</p>
+                    <!-- Otros campos de evaluación de cultivo aquí -->
+                    <p><strong>Sugerencias:</strong> {{ evaluacion.sugerencias }}</p>
+                    <p><strong>Posibles problemas futuros:</strong> {{ evaluacion.posibles_problemas_futuros }}</p>
+                    <p><strong>Fecha:</strong> {{ evaluacion.fecha }}</p>
+                </li>
+                {% empty %}
+                <li class="list-group-item">No tienes evaluaciones de cultivos guardadas.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <!-- Evaluaciones de Suelo -->
+        <div class="col-md-6">
+            <h2 class="fw-bold text-center">Evaluaciones de Suelo</h2>
+            <ul class="list-group">
+                {% for analisis_suelo in analisis_suelo %}
+                <li class="list-group-item m-2">
+                    <h5>Evaluación del suelo</h5>
+                    <p><strong>Textura:</strong> {{ analisis_suelo.textura }}</p>
+                    <p><strong>pH:</strong> {{ analisis_suelo.ph }}</p>
+                    <p><strong>Materia orgánica:</strong> {{ analisis_suelo.materia_organica }}%</p>
+                    <p><strong>Drenaje:</strong> {{ analisis_suelo.drenaje }}</p>
+                    <p><strong>Calidad del suelo:</strong> {{ analisis_suelo.calidad_suelo }}</p>
+                    <p><strong>Recomendaciones:</strong> {{ analisis_suelo.recomendaciones }}</p>
+                    <p><strong>Posibles riesgos:</strong> {{ analisis_suelo.posibles_riesgos }}</p>
+                    <p><strong>Fecha:</strong> {{ analisis_suelo.fecha }}</p>
+                </li>
+                {% empty %}
+                <li class="list-group-item">No tienes análisis de suelo guardados.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </div>
 {% endblock %}

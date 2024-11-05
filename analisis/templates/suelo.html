@@ -18,8 +18,11 @@
 <div class="container">
     <div class="my-3 p-3 rounded shadow-sm col-md-6 mx-auto analisissuelo">
         <h4 class="border-bottom mb-0 text-center fw-bold text-uppercase">Análisis de Suelo</h4>
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
         <div class="pt-3">
-            <form action="{% url 'evaluar_cultivo' %}" method="post">
+            <form action="{% url 'suelo' %}" method="post">
                 {% csrf_token %}
                 <!-- Información del terreno -->
                 <div class="container">
@@ -91,7 +94,7 @@
                                         <option value="Arenoso">Arenoso (grano grueso)</option>
                                     </optgroup>
                                     <optgroup label="Limusina">
-                                        <option value="Limoso">Limoso (grano fino)</option>>
+                                        <option value="Limoso">Limoso (grano fino)</option>
                                     </optgroup>
                                     <optgroup label="Arcilla">
                                         <option value="Arcilloso">Arcilloso (partículas muy finas, compactas)</option>
@@ -104,6 +107,12 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <label for="humedad" class="form-label fw-bold">Nivel de humedad</label>
+                    <input type="range" class="form-range" id="humedad" name="humedad" min="0" max="100" value="0"
+                    title="Seleccione el porcentaje de humedad de el suelo" oninput="document.getElementById('humedadValor').innerText = this.value;">
+                    <div class="mt-2">
+                        <span id="humedadValor">0</span> %
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -129,6 +138,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating border-bottom mb-3">
+                                <input type="number" class="form-control bg-transparent border-0" id="temperatura" placeholder="temperatura"
+                                    name="temperatura" value="" required step="0.1">
+                                <label for="pH" class="fw-bold">Temperatura del suelo</label>
+                            </div>
+                            <small class="text-muted mt-3 p-2">temperatura en (°C)</small>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Análisis Químico del Suelo -->
@@ -139,14 +158,14 @@
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="pH" placeholder="pH"
-                                    name="pH" value="" readonly required step="0.1">
+                                    name="ph" value="" required step="0.1">
                                 <label for="pH" class="fw-bold">pH</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="nitrogeno" placeholder="nitrogeno"
-                                    name="nitrogeno" value="" readonly required step="0.1">
+                                    name="nitrogeno" value="" required step="0.1">
                                 <label for="nitrogeno" class="fw-bold">Nitrógeno (N)</label>
                             </div>
                         </div>
@@ -155,14 +174,14 @@
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="fosforo" placeholder="fosforo"
-                                    name="fosforo" value="" readonly required step="0.1">
+                                    name="fosforo" value="" required step="0.1">
                                 <label for="fosforo" class="fw-bold">Fósforo (P)</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="potasio" placeholder="potasio"
-                                    name="potasio" value="" readonly required step="0.1">
+                                    name="potasio" value="" required step="0.1">
                                 <label for="potasio" class="fw-bold">Potasio (K)</label>
                             </div>
                         </div>
@@ -172,14 +191,14 @@
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="calcio" placeholder="calcio"
-                                    name="calcio" value="" readonly required step="0.1">
+                                    name="calcio" value="" required step="0.1">
                                 <label for="calcio" class="fw-bold">Calcio (Ca)</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="magnesio" placeholder="magnesio"
-                                    name="magnesio" value="" readonly required step="0.1">
+                                    name="magnesio" value="" required step="0.1">
                                 <label for="magnesio" class="fw-bold">Magnesio (Mg)</label>
                             </div>
                         </div>
@@ -188,7 +207,7 @@
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="azufre" placeholder="azufre"
-                                    name="azufre" value="" readonly required step="0.1">
+                                    name="azufre" value="" required step="0.1">
                                 <label for="azufre" class="fw-bold">Azufre (S)</label>
                             </div>
                         </div>
@@ -198,14 +217,14 @@
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="hierro" placeholder="hierro"
-                                    name="hierro" value="" readonly required step="0.1">
+                                    name="hierro" value="" required step="0.1">
                                 <label for="hierro" class="fw-bold">Hierro (Fe)</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="manganeso" placeholder="manganeso"
-                                    name="manganeso" value="" readonly required step="0.1">
+                                    name="manganeso" value="" required step="0.1">
                                 <label for="manganeso" class="fw-bold">Manganeso (Mn)</label>
                             </div>
                         </div>
@@ -214,14 +233,14 @@
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="zinc" placeholder="zinc"
-                                    name="zinc" value="" readonly required step="0.1">
+                                    name="zinc" value="" required step="0.1">
                                 <label for="zinc" class="fw-bold">Zinc (Zn)</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="cobre" placeholder="cobre"
-                                    name="cobre" value="" readonly required step="0.1">
+                                    name="cobre" value="" required step="0.1">
                                 <label for="cobre" class="fw-bold">Cobre (Cu)</label>
                             </div>
                         </div>
@@ -230,32 +249,32 @@
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="boro" placeholder="boro"
-                                    name="boro" value="" readonly required step="0.1">
+                                    name="boro" value="" required step="0.1">
                                 <label for="boro" class="fw-bold">Boro (B)</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
                                 <input type="number" class="form-control bg-transparent border-0" id="molibdeno" placeholder="molibdeno"
-                                    name="molibdeno" value="" readonly required step="0.1">
+                                    name="molibdeno" value="" required step="0.1">
                                 <label for="molibdeno" class="fw-bold">Molibdeno (Mo)</label>
                             </div>
                         </div>
                     </div>
 
-                    <label for="porcentaje" class="form-label fw-bold">Materia orgánica</label>
-                    <input type="range" class="form-range" id="porcentaje" name="porcentaje" min="0" max="100" value="0"
-                        title="Seleccione el porcentaje de Materia orgánica">
+                    <label for="materiaOrganica" class="form-label fw-bold">Materia orgánica</label>
+                    <input type="range" class="form-range" id="materiaOrganica" name="materia_organica" min="0" max="100" value="0"
+                    title="Seleccione el porcentaje de Materia orgánica" oninput="document.getElementById('materiaOrganicaValor').innerText = this.value;">
                     <div class="mt-2">
-                        <span id="porcentajeValor">0</span> %
+                        <span id="materiaOrganicaValor">0</span> %
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
-                                <input type="number" class="form-control bg-transparent border-0" id="azufre" placeholder="azufre"
-                                    name="azufre" value="" readonly required step="0.1">
-                                <label for="azufre" class="fw-bold">Conductividad Eléctrica (CE)</label>
+                                <input type="number" class="form-control bg-transparent border-0" id="salinidad" placeholder="salinidad"
+                                    name="salinidad" value="" required step="0.1">
+                                <label for="salinidad" class="fw-bold">Conductividad Eléctrica (CE)</label>
                             </div>
                             <small class="form-text text-muted">Cantidad de sales solubles (salinidad).</small>
                         </div>
@@ -294,29 +313,29 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
-                                <input type="number" class="form-control bg-transparent border-0" id="cantidades-aplicadas"         placeholder="cantidades-aplicadas" name="cantidades-aplicadas" value="" readonly required>
-                                <label for="cantidades-aplicadas" class="fw-bold">Cantidades aplicadas</label>
+                                <input type="number" class="form-control bg-transparent border-0" id="cantidades-aplicadas"         placeholder="cantidades-aplicadas" name="cantidades-aplicadas" value="" required step="0.1">
+                                <label for="cantidades-aplicadas" class="fw-bold">Cantidades aplicadas (Kg)</label>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating border-bottom mb-3">
-                                <input type="number" class="form-control bg-transparent border-0" id="frecuencia-aplicacion"    placeholder="frecuencia-aplicacion" name="frecuencia-aplicacion" value="" readonly required>
+                                <input type="number" class="form-control bg-transparent border-0" id="frecuencia-aplicacion"    placeholder="frecuencia-aplicacion" name="frecuencia-aplicacion" value="" required>
                                 <label for="frecuencia-aplicacion" class="fw-bold">Frecuencia de aplicación</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         
                 <div class="d-flex justify-content-center pt-3">
-                  <button id="evaluar" class="fw-bold border-0 evaluar me-5" type="submit">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Evaluar
+                    <button id="evaluar" class="fw-bold border-0 evaluar me-5" type="submit">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Evaluar
                   </button>
                 </div>
             </form>
@@ -325,6 +344,6 @@
 </div>
 
 <!-- scripts js -->
-<script type="text/javascript" src="{% static 'js/editar_perfil.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/suelo.js' %}"></script>
 
 {% endblock %}
